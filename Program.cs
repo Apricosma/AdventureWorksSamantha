@@ -1,4 +1,9 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using AdventureWorksSamantha.Data;
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<AWContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("AWContext") ?? throw new InvalidOperationException("Connection string 'AWContext' not found.")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
