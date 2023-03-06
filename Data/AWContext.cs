@@ -16,5 +16,7 @@ namespace AdventureWorksSamantha.Data
 
         public DbSet<Customer> Customer { get; set; } = default!;
         public DbSet<Address> Address { get; set; } = default!;
+
+        public DbSet<CustomerAddress> CustomerAddresses { get; set; } = default!;
     }
 }

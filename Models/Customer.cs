@@ -8,7 +8,7 @@
 		public string CompanyName { get; set; }
 		public string Phone { get; set; }
 
-		public virtual ICollection<Address> Addresses { get; set; }
+		public virtual ICollection<CustomerAddress> CustomerAddresses { get; set; } = new List<CustomerAddress>();
 
 		public Customer()
 		{

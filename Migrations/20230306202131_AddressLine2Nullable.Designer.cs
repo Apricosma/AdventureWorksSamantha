@@ -3,6 +3,7 @@ using AdventureWorksSamantha.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AdventureWorksSamantha.Migrations
 {
     [DbContext(typeof(AWContext))]
-    partial class AWContextModelSnapshot : ModelSnapshot
+    [Migration("20230306202131_AddressLine2Nullable")]
+    partial class AddressLine2Nullable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -20,6 +23,21 @@ namespace AdventureWorksSamantha.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("AddressCustomer", b =>
+                {
+                    b.Property<int>("AddressesId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CustomersId")
+                        .HasColumnType("int");
+
+                    b.HasKey("AddressesId", "CustomersId");
+
+                    b.HasIndex("CustomersId");
+
+                    b.ToTable("AddressCustomer");
+                });
 
             modelBuilder.Entity("AdventureWorksSamantha.Models.Address", b =>
                 {
@@ -82,56 +100,19 @@ namespace AdventureWorksSamantha.Migrations
                     b.ToTable("Customer");
                 });
 
-            modelBuilder.Entity("AdventureWorksSamantha.Models.CustomerAddress", b =>
+            modelBuilder.Entity("AddressCustomer", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("AddressId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CustomerId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AddressId");
-
-                    b.HasIndex("CustomerId");
-
-                    b.ToTable("CustomerAddresses");
-                });
-
-            modelBuilder.Entity("AdventureWorksSamantha.Models.CustomerAddress", b =>
-                {
-                    b.HasOne("AdventureWorksSamantha.Models.Address", "Address")
-                        .WithMany("CustomerAddresses")
-                        .HasForeignKey("AddressId")
+                    b.HasOne("AdventureWorksSamantha.Models.Address", null)
+                        .WithMany()
+                        .HasForeignKey("AddressesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("AdventureWorksSamantha.Models.Customer", "Customer")
-                        .WithMany("CustomerAddresses")
-                        .HasForeignKey("CustomerId")
+                    b.HasOne("AdventureWorksSamantha.Models.Customer", null)
+                        .WithMany()
+                        .HasForeignKey("CustomersId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Address");
-
-                    b.Navigation("Customer");
-                });
-
-            modelBuilder.Entity("AdventureWorksSamantha.Models.Address", b =>
-                {
-                    b.Navigation("CustomerAddresses");
-                });
-
-            modelBuilder.Entity("AdventureWorksSamantha.Models.Customer", b =>
-                {
-                    b.Navigation("CustomerAddresses");
                 });
 #pragma warning restore 612, 618
         }
