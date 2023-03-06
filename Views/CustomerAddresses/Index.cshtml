@@ -1,0 +1,12 @@
+﻿@model AdventureWorksSamantha.Controllers.ViewModels.CustomerAddressDropdownVM
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+@Html.DropDownListFor(model => model.CustomerId, Model.CustomerList, "Choose a customer")
+
+@Html.DropDownListFor(model => model.AddressId, Model.AddressList, "Choose an address")
