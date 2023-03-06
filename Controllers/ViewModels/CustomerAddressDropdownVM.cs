@@ -10,5 +10,7 @@ namespace AdventureWorksSamantha.Controllers.ViewModels
         public List<SelectListItem> AddressList { get; set; }
         public int AddressId { get; set; }
 
+        public bool? HasAddress { get; set; }
+
     }
 }

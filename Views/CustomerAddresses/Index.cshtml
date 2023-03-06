@@ -5,8 +5,26 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+<form method="post">
+    @Html.DropDownListFor(model => model.CustomerId, Model.CustomerList, "Choose a customer")
 
-@Html.DropDownListFor(model => model.CustomerId, Model.CustomerList, "Choose a customer")
+    @Html.DropDownListFor(model => model.AddressId, Model.AddressList, "Choose an address")
 
-@Html.DropDownListFor(model => model.AddressId, Model.AddressList, "Choose an address")
+    <button type="submit">Compare</button>
+
+    @if (Model.HasAddress == null)
+    {
+        <h2>Choose a customer and address to check if they live at that address</h2>
+    }
+
+    @*since the bool is nullable I have to use == true*@
+    @if (Model.HasAddress == true)
+    {
+        <h2>Customer has an address at the selected location</h2>
+    }
+
+    @if (Model.HasAddress == false)
+    {
+        <h2>Customer does not have an address at the selected location</h2>
+    }
+</form>
