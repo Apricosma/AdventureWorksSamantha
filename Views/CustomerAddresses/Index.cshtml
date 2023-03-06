@@ -6,9 +6,11 @@
 }
 
 <form method="post">
-    @Html.DropDownListFor(model => model.CustomerId, Model.CustomerList, "Choose a customer")
+    <label asp-for="CustomerId">Choose a customer</label>
+    <select asp-for="CustomerId" asp-items="Model.CustomerList"></select>
 
-    @Html.DropDownListFor(model => model.AddressId, Model.AddressList, "Choose an address")
+    <label asp-for="AddressId">Choose an address</label>
+    <select asp-for="AddressId" asp-items="Model.AddressList"><</select>
 
     <button type="submit">Compare</button>
 

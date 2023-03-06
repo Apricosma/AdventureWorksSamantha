@@ -49,7 +49,7 @@ namespace AdventureWorksSamantha.Controllers
         {
             // checks if the CustomerAddress database context 
             // matches the current view model
-            bool? hasAddress = _context.CustomerAddresses.Any(ca => 
+            bool? hasAddress = _context.CustomerAddresses.Any(ca =>
                 ca.CustomerId == viewModel.CustomerId &&
                 ca.AddressId == viewModel.AddressId
             );
