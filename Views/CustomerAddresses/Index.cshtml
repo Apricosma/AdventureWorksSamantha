@@ -1,0 +1,32 @@
+﻿@model AdventureWorksSamantha.Controllers.ViewModels.CustomerAddressDropdownVM
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<form method="post">
+    <label asp-for="CustomerId">Choose a customer</label>
+    <select asp-for="CustomerId" asp-items="Model.CustomerList"></select>
+
+    <label asp-for="AddressId">Choose an address</label>
+    <select asp-for="AddressId" asp-items="Model.AddressList"><</select>
+
+    <button type="submit">Compare</button>
+
+    @if (Model.HasAddress == null)
+    {
+        <h2>Choose a customer and address to check if they live at that address</h2>
+    }
+
+    @*since the bool is nullable I have to use == true*@
+    @if (Model.HasAddress == true)
+    {
+        <h2>Customer has an address at the selected location</h2>
+    }
+
+    @if (Model.HasAddress == false)
+    {
+        <h2>Customer does not have an address at the selected location</h2>
+    }
+</form>
