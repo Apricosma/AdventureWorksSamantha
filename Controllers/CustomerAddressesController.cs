@@ -44,17 +44,7 @@ namespace AdventureWorksSamantha.Controllers
             //return View(await aWContext.ToListAsync());
 
             var viewModel = new CustomerAddressDropdownVM();
-            //viewModel.CustomerList = _context.Customer.Select(c => new SelectListItem
-            //{
-            //    Value = c.Id.ToString(),
-            //    Text = c.FirstName + " " + c.LastName
-            //}).ToList();
 
-            //viewModel.AddressList = _context.Address.Select(a => new SelectListItem
-            //{
-            //    Value = a.Id.ToString(),
-            //    Text = a.AddressLine1
-            //}).ToList();
             passModel(viewModel);
 
             return View(viewModel);
@@ -75,17 +65,6 @@ namespace AdventureWorksSamantha.Controllers
 
             // re-plugging in the list to the view model seems to be the only way I can resolve
             // an exception from happening. There has to be an easier way to recycle the old objects but I'm unsure.
-            //viewModel.CustomerList = _context.Customer.Select(c => new SelectListItem
-            //{
-            //    Value = c.Id.ToString(),
-            //    Text = c.FirstName + " " + c.LastName
-            //}).ToList();
-
-            //viewModel.AddressList = _context.Address.Select(a => new SelectListItem
-            //{
-            //    Value = a.Id.ToString(),
-            //    Text = a.AddressLine1
-            //}).ToList();
             passModel(viewModel);
 
             return View(viewModel);
