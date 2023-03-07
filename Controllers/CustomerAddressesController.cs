@@ -21,13 +21,9 @@ namespace AdventureWorksSamantha.Controllers
             _context = context;
         }
 
-        // GET: CustomerAddresses
-        public async Task<IActionResult> Index()
+        // passes info to the viewmodel
+        private void passModel(CustomerAddressDropdownVM viewModel)
         {
-            //var aWContext = _context.CustomerAddresses.Include(c => c.Address).Include(c => c.Customer);
-            //return View(await aWContext.ToListAsync());
-
-            var viewModel = new CustomerAddressDropdownVM();
             viewModel.CustomerList = _context.Customer.Select(c => new SelectListItem
             {
                 Value = c.Id.ToString(),
@@ -39,6 +35,27 @@ namespace AdventureWorksSamantha.Controllers
                 Value = a.Id.ToString(),
                 Text = a.AddressLine1
             }).ToList();
+        }
+
+        // GET: CustomerAddresses
+        public async Task<IActionResult> Index()
+        {
+            //var aWContext = _context.CustomerAddresses.Include(c => c.Address).Include(c => c.Customer);
+            //return View(await aWContext.ToListAsync());
+
+            var viewModel = new CustomerAddressDropdownVM();
+            //viewModel.CustomerList = _context.Customer.Select(c => new SelectListItem
+            //{
+            //    Value = c.Id.ToString(),
+            //    Text = c.FirstName + " " + c.LastName
+            //}).ToList();
+
+            //viewModel.AddressList = _context.Address.Select(a => new SelectListItem
+            //{
+            //    Value = a.Id.ToString(),
+            //    Text = a.AddressLine1
+            //}).ToList();
+            passModel(viewModel);
 
             return View(viewModel);
         }
@@ -58,17 +75,18 @@ namespace AdventureWorksSamantha.Controllers
 
             // re-plugging in the list to the view model seems to be the only way I can resolve
             // an exception from happening. There has to be an easier way to recycle the old objects but I'm unsure.
-            viewModel.CustomerList = _context.Customer.Select(c => new SelectListItem
-            {
-                Value = c.Id.ToString(),
-                Text = c.FirstName + " " + c.LastName
-            }).ToList();
+            //viewModel.CustomerList = _context.Customer.Select(c => new SelectListItem
+            //{
+            //    Value = c.Id.ToString(),
+            //    Text = c.FirstName + " " + c.LastName
+            //}).ToList();
 
-            viewModel.AddressList = _context.Address.Select(a => new SelectListItem
-            {
-                Value = a.Id.ToString(),
-                Text = a.AddressLine1
-            }).ToList();
+            //viewModel.AddressList = _context.Address.Select(a => new SelectListItem
+            //{
+            //    Value = a.Id.ToString(),
+            //    Text = a.AddressLine1
+            //}).ToList();
+            passModel(viewModel);
 
             return View(viewModel);
         }
