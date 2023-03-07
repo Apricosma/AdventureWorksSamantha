@@ -15,5 +15,14 @@
 		{
 
 		}
-	}
+
+		public Address(string addressLine1, string? addressLine2, string city, string stateProvince, string countryRegion)
+        {
+            AddressLine1 = addressLine1;
+            AddressLine2 = addressLine2;
+            City = city;
+            StateProvince = stateProvince;
+            CountryRegion = countryRegion;
+        }
+    }
 }

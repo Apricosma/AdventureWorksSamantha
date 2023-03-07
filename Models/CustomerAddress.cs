@@ -9,5 +9,11 @@
 
 		public virtual Address Address { get; set; }
 		public int AddressId { get; set; }
+
+		public CustomerAddress(int customerId, int addressId)
+		{
+			CustomerId = customerId;
+			AddressId = addressId;
+		}
 	}
 }

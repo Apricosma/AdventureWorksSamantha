@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using AdventureWorksSamantha.Data;
+using AdventureWorksSamantha.Models;
+
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<AWContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("AWContext") ?? throw new InvalidOperationException("Connection string 'AWContext' not found.")));
@@ -10,13 +12,20 @@ builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (!app.Environment.IsDevelopment())
+using (var scope = app.Services.CreateScope())
 {
-	app.UseExceptionHandler("/Home/Error");
-	// The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-	app.UseHsts();
+	var services = scope.ServiceProvider;
+
+	await Seed.Initialize(services);
 }
+
+	// Configure the HTTP request pipeline.
+	if (!app.Environment.IsDevelopment())
+	{
+		app.UseExceptionHandler("/Home/Error");
+		// The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+		app.UseHsts();
+	}
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();

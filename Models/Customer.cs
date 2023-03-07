@@ -14,5 +14,13 @@
 		{
 
 		}
+
+		public Customer(string firstName, string lastName, string companyName, string phone)
+		{
+			FirstName = firstName;
+			LastName = lastName;
+			CompanyName = companyName;
+			Phone = phone;
+		}
 	}
 }
